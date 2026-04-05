@@ -34,8 +34,13 @@ export class UploadComponent {
     const formData = new FormData();
     formData.append('file', this.file);
     formData.append('job_description', this.jobDescription);
+    
+const API_URL =
+  location.hostname === 'localhost'
+    ? 'http://localhost:5000/analyze'
+    : 'https://ai-resume-analyzer-backend-46z5.onrender.com/analyze';
 
-    this.http.post('http://localhost:5000/analyze', formData).subscribe({
+    this.http.post(API_URL, formData).subscribe({
       next: (res: any) => {
         this.zone.run(() => {
           this.result = res;
